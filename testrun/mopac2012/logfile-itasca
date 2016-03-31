@@ -1,0 +1,20 @@
+Job t3                   executed in node0273   irank    2 completed in              737.155 seconds.
+Job t2                   executed in node0189   irank    1 completed in              737.701 seconds.
+Job t4                   executed in node0277   irank    3 completed in              737.764 seconds.
+Job t1                   executed in node0109   irank    0 completed in              743.895 seconds.
+Job t8                   executed in node0277   irank    3 completed in              735.243 seconds.
+Job t7                   executed in node0273   irank    2 completed in              737.973 seconds.
+Job t6                   executed in node0189   irank    1 completed in              739.794 seconds.
+Job t5                   executed in node0109   irank    0 completed in              741.836 seconds.
+Job t12                  executed in node0277   irank    3 completed in              736.356 seconds.
+Job t11                  executed in node0273   irank    2 completed in              737.593 seconds.
+Job t10                  executed in node0189   irank    1 completed in              736.122 seconds.
+Job t9                   executed in node0109   irank    0 completed in              737.164 seconds.
+Job t16                  executed in node0277   irank    3 completed in              737.033 seconds.
+Total time in node0277              2946.498 seconds.
+Job t15                  executed in node0273   irank    2 completed in              734.932 seconds.
+Total time in node0273              2947.769 seconds.
+Job t14                  executed in node0189   irank    1 completed in              736.918 seconds.
+Total time in node0189              2950.652 seconds.
+Job t13                  executed in node0109   irank    0 completed in              742.851 seconds.
+Total time in node0109              2965.851 seconds.

@@ -1,0 +1,20 @@
+Job t1                   executed in cn0049     irank    0 completed in              695.576 seconds.
+Job t2                   executed in cn0049     irank    1 completed in              699.115 seconds.
+Job t3                   executed in cn0049     irank    2 completed in              701.071 seconds.
+Job t4                   executed in cn0049     irank    3 completed in              704.874 seconds.
+Job t5                   executed in cn0049     irank    0 completed in              678.955 seconds.
+Job t6                   executed in cn0049     irank    1 completed in              681.568 seconds.
+Job t7                   executed in cn0049     irank    2 completed in              680.723 seconds.
+Job t8                   executed in cn0049     irank    3 completed in              682.142 seconds.
+Job t9                   executed in cn0049     irank    0 completed in              686.424 seconds.
+Job t10                  executed in cn0049     irank    1 completed in              687.653 seconds.
+Job t11                  executed in cn0049     irank    2 completed in              689.441 seconds.
+Job t12                  executed in cn0049     irank    3 completed in              686.099 seconds.
+Job t13                  executed in cn0049     irank    0 completed in              683.961 seconds.
+Total time in cn0049                2744.970 seconds.
+Job t15                  executed in cn0049     irank    2 completed in              681.044 seconds.
+Total time in cn0049                2752.356 seconds.
+Job t14                  executed in cn0049     irank    1 completed in              688.349 seconds.
+Total time in cn0049                2756.740 seconds.
+Job t16                  executed in cn0049     irank    3 completed in              686.000 seconds.
+Total time in cn0049                2759.185 seconds.

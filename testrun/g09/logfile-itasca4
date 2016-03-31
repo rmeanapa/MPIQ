@@ -1,0 +1,24 @@
+Job 8                    executed in node0011   irank    7 completed in              144.297 seconds.
+Job 4                    executed in node0011   irank    3 completed in              144.339 seconds.
+Job 3                    executed in node0010   irank    2 completed in              144.404 seconds.
+Job 2                    executed in node0008   irank    1 completed in              144.411 seconds.
+Job 6                    executed in node0008   irank    5 completed in              144.436 seconds.
+Job 1                    executed in node0007   irank    0 completed in              144.505 seconds.
+Job 5                    executed in node0007   irank    4 completed in              144.495 seconds.
+Job 7                    executed in node0010   irank    6 completed in              144.543 seconds.
+Job 16                   executed in node0011   irank    7 completed in              138.362 seconds.
+Total time in node0011               282.735 seconds.
+Job 11                   executed in node0010   irank    2 completed in              138.927 seconds.
+Total time in node0010               283.427 seconds.
+Job 12                   executed in node0011   irank    3 completed in              139.779 seconds.
+Total time in node0011               284.212 seconds.
+Job 15                   executed in node0010   irank    6 completed in              139.610 seconds.
+Total time in node0010               284.236 seconds.
+Job 14                   executed in node0008   irank    5 completed in              140.410 seconds.
+Total time in node0008               284.928 seconds.
+Job 13                   executed in node0007   irank    4 completed in              140.492 seconds.
+Total time in node0007               285.079 seconds.
+Job 9                    executed in node0007   irank    0 completed in              140.536 seconds.
+Total time in node0007               285.106 seconds.
+Job 10                   executed in node0008   irank    1 completed in              141.377 seconds.
+Total time in node0008               285.883 seconds.

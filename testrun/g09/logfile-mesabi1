@@ -1,0 +1,20 @@
+Job 2                    executed in cn0074     irank    1 completed in               72.152 seconds.
+Job 4                    executed in cn0074     irank    3 completed in               72.152 seconds.
+Job 8                    executed in cn0074     irank    3 completed in               69.631 seconds.
+Job 6                    executed in cn0074     irank    1 completed in               69.656 seconds.
+Job 3                    executed in cn0580     irank    2 completed in              157.127 seconds.
+Job 1                    executed in cn0580     irank    0 completed in              158.563 seconds.
+Job 12                   executed in cn0074     irank    3 completed in               69.559 seconds.
+Job 10                   executed in cn0074     irank    1 completed in               69.549 seconds.
+Job 14                   executed in cn0074     irank    1 completed in               69.578 seconds.
+Total time in cn0074                 281.047 seconds.
+Job 16                   executed in cn0074     irank    3 completed in               69.628 seconds.
+Total time in cn0074                 281.076 seconds.
+Job 7                    executed in cn0580     irank    2 completed in              148.040 seconds.
+Job 5                    executed in cn0580     irank    0 completed in              156.567 seconds.
+Job 11                   executed in cn0580     irank    2 completed in              161.476 seconds.
+Job 9                    executed in cn0580     irank    0 completed in              155.036 seconds.
+Job 15                   executed in cn0580     irank    2 completed in              144.670 seconds.
+Total time in cn0580                 611.412 seconds.
+Job 13                   executed in cn0580     irank    0 completed in              150.095 seconds.
+Total time in cn0580                 620.366 seconds.

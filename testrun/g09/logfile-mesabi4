@@ -1,0 +1,24 @@
+Job 5                    executed in cn0065     irank    4 completed in              125.213 seconds.
+Job 2                    executed in cn0065     irank    1 completed in              125.701 seconds.
+Job 8                    executed in cn0065     irank    7 completed in              125.844 seconds.
+Job 4                    executed in cn0131     irank    3 completed in              126.785 seconds.
+Job 6                    executed in cn0033     irank    5 completed in              126.873 seconds.
+Job 3                    executed in cn0033     irank    2 completed in              126.935 seconds.
+Job 7                    executed in cn0131     irank    6 completed in              127.078 seconds.
+Job 1                    executed in cn0131     irank    0 completed in              127.109 seconds.
+Job 13                   executed in cn0065     irank    4 completed in              124.163 seconds.
+Total time in cn0065                 249.493 seconds.
+Job 10                   executed in cn0065     irank    1 completed in              124.263 seconds.
+Total time in cn0065                 250.082 seconds.
+Job 16                   executed in cn0065     irank    7 completed in              124.378 seconds.
+Total time in cn0065                 250.340 seconds.
+Job 12                   executed in cn0131     irank    3 completed in              125.151 seconds.
+Total time in cn0131                 252.049 seconds.
+Job 11                   executed in cn0033     irank    2 completed in              125.172 seconds.
+Total time in cn0033                 252.218 seconds.
+Job 9                    executed in cn0131     irank    0 completed in              125.610 seconds.
+Total time in cn0131                 252.805 seconds.
+Job 15                   executed in cn0131     irank    6 completed in              136.232 seconds.
+Total time in cn0131                 263.414 seconds.
+Job 14                   executed in cn0033     irank    5 completed in              136.496 seconds.
+Total time in cn0033                 263.481 seconds.

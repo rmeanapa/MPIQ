@@ -1,0 +1,26 @@
+#!/bin/bash -l
+#
+# Job: This job run 8 jobs in two nodes
+#
+#
+# qg09 version 1.0.7
+#
+# To submit this script to the queue type:
+#    qsub a001.pbs
+#
+#PBS -m n
+#PBS -l nodes=4:ppn=8
+#PBS -l walltime=00:30:00
+#PBS -l pmem=1000mb
+#PBS -e s.e
+#PBS -o s.o
+#PBS -q small 
+#
+cd $PBS_O_WORKDIR
+
+module load ompi/1.8.5/intel-2015-update3 
+module load gaussian/g09.a02.mngfm50  
+export GAUSS_SCRDIR=/scratch/meanapan
+mpirun -np 8 --map-by node ./mpiq.exe > logfile
+#mpirun -np 4 -bynode ../mpiq.exe > logfile
+#mpirun -np 2 ../mpiq.exe > logfile
