@@ -1,7 +1,6 @@
-nguage: fortran 
-sudo: required
+language: fortran 
 before_install:
-  - sudo apt-get install gfortran openmpi
+  - module load gcc openmpi
 
 script:
   - mpif90 mpiqf.f90 -o mpiq.exe 
