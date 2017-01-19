@@ -1,6 +1,5 @@
 language: fortran 
 before_install:
-  - module load gcc openmpi
 
 script:
   - mpif90 mpiqf.f90 -o mpiq.exe 
