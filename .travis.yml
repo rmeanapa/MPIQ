@@ -1,8 +1,0 @@
-language: fortran 
-before_install:
-
-script:
-  - mpif90 mpiqf.f90 -o mpiq.exe 
-
-after_success:
-- bash <(echo "Successfull test!)
