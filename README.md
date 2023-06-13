@@ -1,25 +1,15 @@
 # MPIQ
 MPI/Fortran90 code that runs a bunch of jobs in parallel.
 
-  MPI FORTRAN code to run several jobs in parallel
-  -------------------------------------------------
-
-Author:  Ruben Meana-Paneda
-Date:    July 10, 2014
-Updated: December 16, 2015
-Version: 3.0
-
-Version 2.0: This version of the code allows user to input a number of jobs greater than the number of nodes, i.e. 
-a better load balancing is achieved. 
- 
-Version 3.0: This version can run jobs on an independent directory where each job is run. It makes the use of the
-GNU parallel command.
+  MPIQ: a MPI/Fortran MPI FORTRAN code to wrap and run several jobs in parallel
+  -----------------------------------------------------------------------------
 
 == Files ==
 
-mpiq.f90       MPI-FORTRAN90 code to run several jobs in parallel.
-jobslist.txt   This file contains the number of jobs and the names of the input files (without extension).
-mpiq.pbs       PBS script to submit the job.
+mpiq.f90       MPI/Fortran code to run several jobs in parallel.
+jobslist.txt   File with the number of jobs and the names of the input files (without extension).
+mpiq.pbs       PBS script to submit the jobs.
+mpiq.slurm     Slurm script to submit the jobs.
 
 == Installation ==
 
@@ -39,12 +29,12 @@ mpiq.pbs       PBS script to submit the job.
          runcode(i)  = "g09"//" < "//adjustl(trim(fname(i)))//".gjf > " &     ! Code execution sentence (including file extensions)
          &                         //adjustl(trim(fname(i)))//".out"          
 
-          To run MOPAC:
+         E.g. to run MOPAC:
 
          runcode(i)  = "/usr/soft/mopac/mopac.exe"//" < "//adjustl(trim(fname(i)))//".gjf > " &     ! Code execution sentence (including file extensions)
          &                         //adjustl(trim(fname(i)))//".out"          
 
-       c) If the jobs require a work directory, and other extra steps: 
+       c) If the jobs require a work directory, or other extra steps: 
 
          runcode(i) = &
          &  "mkdir -p scratch-"//adjustl(trim(fname(i)))// &                                    ! Create work directory
@@ -69,7 +59,7 @@ mpiq.pbs       PBS script to submit the job.
         scrdir     = "mkdir -p /scratch/meanapan"                              ! Scratch directory if needed
 
 
-2. Compile the code by executing:
+2. Compile the code using the Fortran/MPI compilers. 
 
    module load ompi 
    mpif90 -o mpiq.exe mpiq.f90
@@ -81,14 +71,14 @@ mpiq.pbs       PBS script to submit the job.
 
 3. Create the file "jobslist.txt" with the number of jobs and the names of the input files without extension. For instance:
    
-    2
-    1 
-    2
+    2 ! number of jobs
+    1 ! input filename
+    2 ! input filename
 
 Note that the jobs should be written in order of time priority to get full advantage of this script 
 (i.e. jobs that take longer time should be written first).
 
-4. Open the PBS file (mpiq.pbs), change the directory scratch location and the location of the file "mpiq.exe" and 
+4. Open the Slurm/PBS file (mpiq.slurm or mpiq.pbs), change the directory scratch location and the location of the file "mpiq.exe" and 
 input the number of nodes. Remember that the number of nodes has to be equal or lower than the number of jobs.
 
 For instance to run two Gaussian jobs at the same time, where each job uses 8 cores of one node, using OpenMPI:
@@ -120,6 +110,10 @@ mpirun -np 2 --map-by node $HOME/soft/bin/mpiq.exe > logfile
 
 
 == How to submit the job ==
+
+To submit the Slurm script (mqiq.slurm) to the queue, type:
+
+slurm mpiq.slurm
 
 To submit the PBS script (mqiq.pbs) to the queue, type:
 
