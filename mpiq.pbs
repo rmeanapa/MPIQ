@@ -15,16 +15,13 @@
 #
 cd $PBS_O_WORKDIR
 
-
 module load gaussian/g09.a02.mngfm50  
 export GAUSS_SCRDIR=/scratch/meanapan
 mkdir -p /scratch/meanapan
 
 ## Use Intel MPI 
-#module load intel impi
-module load ompi/1.8.5/intel-2015-update3
+module load intel mpi
 # Each job in one node
 mpirun -np 2 --map-by node $HOME/soft/bin/mpicola.exe > logfile 
-#mpirun -np 2 $HOME/soft/bin/mpicola.exe > logfile 
 
 
