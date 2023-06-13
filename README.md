@@ -4,10 +4,10 @@ A MPI Fortran code that wraps and runs a bunch of jobs in parallel.
 
 ### Files 
 
-``` mpiq.f90 ``` MPI/Fortran code to run several jobs in parallel.
-``` jobslist.txt ``` File with the number of jobs and the names of the input files (without extension).
-``` mpiq.pbs ``` PBS script to submit the jobs.
-``` mpiq.slurm ``` Slurm script to submit the jobs.
+``` mpiq.f90 ```        MPI/Fortran code to run several jobs in parallel.                           
+``` jobslist.txt ```    File with the number of jobs and the names of the input files (without extension).                         
+``` mpiq.pbs ```        PBS script to submit the jobs.                                                    
+``` mpiq.slurm ```      Slurm script to submit the jobs.                                                         
 
 ### Installation
 
@@ -144,4 +144,7 @@ The file "logfile" contains information of the succesfully executed jobs.
 
 The directory testrun includes an example that run 16 Gaussian09 jobs in total
 by using 4 nodes and 8 cores per node.
+
+
+
 
