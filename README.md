@@ -1,17 +1,15 @@
 # MPIQ
-MPI/Fortran90 code that runs a bunch of jobs in parallel.
 
-  MPIQ: a MPI/Fortran MPI FORTRAN code to wrap and run several jobs in parallel
-  -----------------------------------------------------------------------------
+A MPI Fortran code that wraps and runs a bunch of jobs in parallel.
 
-== Files ==
+### Files 
 
-mpiq.f90       MPI/Fortran code to run several jobs in parallel.
-jobslist.txt   File with the number of jobs and the names of the input files (without extension).
-mpiq.pbs       PBS script to submit the jobs.
-mpiq.slurm     Slurm script to submit the jobs.
+``` mpiq.f90       ``` MPI/Fortran code to run several jobs in parallel.
+``` jobslist.txt   ``` File with the number of jobs and the names of the input files (without extension).
+``` mpiq.pbs       ``` PBS script to submit the jobs.
+``` mpiq.slurm     ``` Slurm script to submit the jobs.
 
-== Installation ==
+### Installation
 
 1. Open the mpiq.f90 file and uncomment/modify the following lines:
 
@@ -21,21 +19,28 @@ mpiq.slurm     Slurm script to submit the jobs.
        a) The name of the code that is going to be run and the input file without extension.
           For instance to run Gaussian09:
 
-         runcode(i)  = "g09 "//fname         ! Gaussian execution sentence
+   ```
+         runcode(i)  = "g09 "//fname         ! Gaussian execution sentence 
+   ```
  
        b) The code to be run and the name of the input/ouput files with their extensions. 
           For instance to run Gaussian09:
 
+   ```
          runcode(i)  = "g09"//" < "//adjustl(trim(fname(i)))//".gjf > " &     ! Code execution sentence (including file extensions)
          &                         //adjustl(trim(fname(i)))//".out"          
+   ```
 
          E.g. to run MOPAC:
 
+   ```
          runcode(i)  = "/usr/soft/mopac/mopac.exe"//" < "//adjustl(trim(fname(i)))//".gjf > " &     ! Code execution sentence (including file extensions)
          &                         //adjustl(trim(fname(i)))//".out"          
+   ```
 
        c) If the jobs require a work directory, or other extra steps: 
 
+   ```
          runcode(i) = &
          &  "mkdir -p scratch-"//adjustl(trim(fname(i)))// &                                    ! Create work directory
      !   & ";mkdir -p /scratch/meanapan" // &                                                   ! Create scratch directory if needed 
@@ -43,37 +48,47 @@ mpiq.slurm     Slurm script to submit the jobs.
          & ";cd scratch-"//adjustl(trim(fname(i)))// &                                          ! Change to the work directory 
          & ";g09 < " //adjustl(trim(fname(i)))//".com > "//adjustl(trim(fname(i)))//".out "// & ! Run code 
          & "; rm -f *scratchfiles* "// &                                                        ! Remove scratch files if needed
-         & "; cd .."                                                                            ! Change to home work directory
+         & "; cd .."                                                                            ! Change to home work directory   ```
+   ```
 
          For instance to run ANT:
 
+   ```
          runcode(i) = &
          &  "mkdir -p scratch-"//adjustl(trim(fname(i)))// &                                    ! Create work directory
          & ";/bin/cp "//adjustl(trim(fname(i)))//".inp scratch-"//adjustl(trim(fname(i)))// &   ! Copy input file in the work directory
          & ";cd scratch-"//adjustl(trim(fname(i)))// &                                          ! Change to the work directory 
          & "; ANT.exe  < " //adjustl(trim(fname(i)))//".inp > "//adjustl(trim(fname(i)))//".out "// & ! Run code 
-         & "; cd .."                                                                            ! Change to home work directory
+         & "; cd .."                                                                            ! Change to home work directory 
+   ```
 
    1.2  Modify the location of the scratch directory used by the program for temporary files in each node:
 
+   ```
         scrdir     = "mkdir -p /scratch/meanapan"                              ! Scratch directory if needed
+   ```
 
 
 2. Compile the code using the Fortran/MPI compilers. 
 
+   ```
    module load ompi 
-   mpif90 -o mpiq.exe mpiq.f90
+   mpif90 -o mpiq.exe mpiq.f90 
+   ```
 
  or, if the Intel MPI compiler is available:
 
+   ```
    module load impi 
-   mpif90 -o mpiq.exe mpiq.f90
+   mpif90 -o mpiq.exe mpiq.f90 
+   ``` 
 
 3. Create the file "jobslist.txt" with the number of jobs and the names of the input files without extension. For instance:
-   
+    ``` 
     2 ! number of jobs
     1 ! input filename
     2 ! input filename
+    ``` 
 
 Note that the jobs should be written in order of time priority to get full advantage of this script 
 (i.e. jobs that take longer time should be written first).
