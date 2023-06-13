@@ -4,10 +4,10 @@ A MPI Fortran code that wraps and runs a bunch of jobs in parallel.
 
 ### Files 
 
-``` mpiq.f90       ``` MPI/Fortran code to run several jobs in parallel.
-``` jobslist.txt   ``` File with the number of jobs and the names of the input files (without extension).
-``` mpiq.pbs       ``` PBS script to submit the jobs.
-``` mpiq.slurm     ``` Slurm script to submit the jobs.
+``` mpiq.f90 ``` MPI/Fortran code to run several jobs in parallel.
+``` jobslist.txt ``` File with the number of jobs and the names of the input files (without extension).
+``` mpiq.pbs ``` PBS script to submit the jobs.
+``` mpiq.slurm ``` Slurm script to submit the jobs.
 
 ### Installation
 
@@ -98,6 +98,7 @@ input the number of nodes. Remember that the number of nodes has to be equal or 
 
 For instance to run two Gaussian jobs at the same time, where each job uses 8 cores of one node, using OpenMPI:
 
+```
 #!/bin/bash -l
 #
 # Job:  Example
@@ -122,29 +123,25 @@ module load ompi/1.8.5/intel-2015-update3
 module load gaussian
 export GAUSS_SCRDIR=/scratch/meanapan
 mpirun -np 2 --map-by node $HOME/soft/bin/mpiq.exe > logfile
+```
 
-
-== How to submit the job ==
+### How to submit the job 
 
 To submit the Slurm script (mqiq.slurm) to the queue, type:
-
+```
 slurm mpiq.slurm
-
+```
 To submit the PBS script (mqiq.pbs) to the queue, type:
-
+```
 qsub mpiq.pbs
+```
 
-
-== Logfile ==
+### Logfile 
 
 The file "logfile" contains information of the succesfully executed jobs.
 
-
-== Test run ==
+### Test run 
 
 The directory testrun includes an example that run 16 Gaussian09 jobs in total
 by using 4 nodes and 8 cores per node.
 
-
-
- 
