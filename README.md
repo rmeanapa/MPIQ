@@ -19,28 +19,28 @@ A MPI Fortran code that wraps and runs a bunch of jobs in parallel.
        a) The name of the code that is going to be run and the input file without extension.
           For instance to run Gaussian09:
 
-   ```
+   ```Fortran
          runcode(i)  = "g09 "//fname         ! Gaussian execution sentence 
    ```
  
        b) The code to be run and the name of the input/ouput files with their extensions. 
           For instance to run Gaussian09:
 
-   ```
+   ```Fortran
          runcode(i)  = "g09"//" < "//adjustl(trim(fname(i)))//".gjf > " &     ! Code execution sentence (including file extensions)
          &                         //adjustl(trim(fname(i)))//".out"          
    ```
 
          E.g. to run MOPAC:
 
-   ```
+   ```Fortran
          runcode(i)  = "/usr/soft/mopac/mopac.exe"//" < "//adjustl(trim(fname(i)))//".gjf > " &     ! Code execution sentence (including file extensions)
          &                         //adjustl(trim(fname(i)))//".out"          
    ```
 
        c) If the jobs require a work directory, or other extra steps: 
 
-   ```
+   ```bash
          runcode(i) = &
          &  "mkdir -p scratch-"//adjustl(trim(fname(i)))// &                                    ! Create work directory
      !   & ";mkdir -p /scratch/meanapan" // &                                                   ! Create scratch directory if needed 
@@ -53,7 +53,7 @@ A MPI Fortran code that wraps and runs a bunch of jobs in parallel.
 
          For instance to run ANT:
 
-   ```
+   ```Fortran
          runcode(i) = &
          &  "mkdir -p scratch-"//adjustl(trim(fname(i)))// &                                    ! Create work directory
          & ";/bin/cp "//adjustl(trim(fname(i)))//".inp scratch-"//adjustl(trim(fname(i)))// &   ! Copy input file in the work directory
@@ -64,27 +64,27 @@ A MPI Fortran code that wraps and runs a bunch of jobs in parallel.
 
    1.2  Modify the location of the scratch directory used by the program for temporary files in each node:
 
-   ```
+   ```bash
         scrdir     = "mkdir -p /scratch/meanapan"                              ! Scratch directory if needed
    ```
 
 
 2. Compile the code using the Fortran/MPI compilers. 
 
-   ```
+   ```bash
    module load ompi 
-   mpif90 -o mpiq.exe mpiq.f90 
+   mpifort -o mpiq.exe mpiq.f90 
    ```
 
  or, if the Intel MPI compiler is available:
 
-   ```
+   ```bash
    module load impi 
-   mpif90 -o mpiq.exe mpiq.f90 
+   mpifort -o mpiq.exe mpiq.f90 
    ``` 
 
 3. Create the file "jobslist.txt" with the number of jobs and the names of the input files without extension. For instance:
-    ``` 
+    ```bash 
     2 ! number of jobs
     1 ! input filename
     2 ! input filename
@@ -98,7 +98,7 @@ input the number of nodes. Remember that the number of nodes has to be equal or 
 
 For instance to run two Gaussian jobs at the same time, where each job uses 8 cores of one node, using OpenMPI:
 
-```
+```bash
 #!/bin/bash -l
 #
 # Job:  Example
@@ -128,11 +128,11 @@ mpirun -np 2 --map-by node $HOME/soft/bin/mpiq.exe > logfile
 ### How to submit the job 
 
 To submit the Slurm script (mqiq.slurm) to the queue, type:
-```
+```bash
 slurm mpiq.slurm
 ```
 To submit the PBS script (mqiq.pbs) to the queue, type:
-```
+```bash
 qsub mpiq.pbs
 ```
 

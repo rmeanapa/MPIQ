@@ -20,8 +20,8 @@ export GAUSS_SCRDIR=/scratch/meanapan
 mkdir -p /scratch/meanapan
 
 # Load modules
-#module load intel impi
-#module load gcc openmpi 
+module load intel impi
+module load gcc openmpi 
 
 # Each job in one node
 mpirun -np 2 --map-by node $HOME/soft/bin/mpicola.exe > logfile 

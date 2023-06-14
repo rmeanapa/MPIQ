@@ -4,23 +4,31 @@ program mpiq
 !  MPIQ: MPI Fortran code to wrap and run several jobs in parallel
 !===================================================================
 !
+use mpi
 implicit none
-include 'mpif.h'
+!include 'mpif.h'
 character(len=80),allocatable   :: fname(:)
 character(len=80)               :: proc_name,scrdir
 character(len=1000),allocatable :: runcode(:)
-integer, allocatable            :: t1(:),t2(:)
-real                            :: ti,tf
-integer                         :: i,irank,ierror,nproc,ntasks,ierr,leng,count_rate
+integer, allocatable            :: t1(:), t2(:)
+real                            :: ti, tf
+integer                         :: i, irank, ierror, nproc, ntasks, ierr, leng, count_rate, istat
+integer, parameter              :: root=0
 !
 call MPI_INIT(ierror)
 call MPI_COMM_SIZE (MPI_COMM_WORLD, nproc, ierror)
 call MPI_COMM_RANK (MPI_COMM_WORLD, irank, ierror)
 call MPI_GET_PROCESSOR_NAME(proc_name,leng, ierror)
+!
 ti = MPI_Wtime()
 !
 if( irank.eq.0 )then
- open(unit=20,file='jobslist.txt') ! Open file with the number and the names of the input files
+ open(unit=20,file='jobslist.txt',status='OLD',iostat=istat) ! Open file with the number and the names of the input files
+ if ( istat /= 0 ) then
+   write(6,*) "Input file jobslist.txt open failure"
+   call MPI_ABORT(MPI_COMM_WORLD,ierror)
+   stop
+ endif
  read(20,*) ntasks
  if( nproc.gt.ntasks ) then        ! Check number of processors and number of tasks 
    write(6,*) "Error: The number of requested nodes is greater than the number of jobs."
@@ -29,9 +37,9 @@ if( irank.eq.0 )then
    stop
  end if
 end if
-call mpi_bcast(ntasks,1,mpi_integer,0,mpi_comm_world,ierr)
+call mpi_bcast(ntasks,1,mpi_integer,root,mpi_comm_world,ierr)
 allocate(runcode(ntasks),t1(ntasks),t2(ntasks),fname(ntasks))
-if(irank.eq.0)then
+if( irank.eq.0 )then
  do i = 1, ntasks
    read(20,*) fname(i)                                                  ! Read the names of the input files 
 
@@ -51,13 +59,13 @@ if(irank.eq.0)then
 !   & "; cd .."                                                                            ! Change to home work directory
 
  end do
- close(20)                                                             ! Close file with the number and input file names
+ close(unit=20,status='KEEP',iostat=istat) ! Close file with the number and input file names
 end if
-call mpi_bcast(fname,80*ntasks,mpi_character,0,mpi_comm_world,ierr)
-call mpi_bcast(runcode,1000*ntasks,mpi_character,0,mpi_comm_world,ierr)
+call mpi_bcast(fname,80*ntasks,mpi_character,root,mpi_comm_world,ierr)
+!call mpi_bcast(runcode,1000*ntasks,mpi_character,0,mpi_comm_world,ierr)
 scrdir = "mkdir -p /scratch/rmeanapa"                                  ! Scratch directory if needed
 !
-do i = irank+1,ntasks,nproc
+do i = irank+1, ntasks,nproc
  call system(scrdir)                                                   ! Create scratch directory if needed
  call system_clock(t1(i),count_rate)                                   ! Start time
  call system(runcode(i))                                               ! Run code 
