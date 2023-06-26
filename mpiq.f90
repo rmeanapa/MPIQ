@@ -1,9 +1,9 @@
 program mpiq 
 
-!===================================================================
-!  MPIQ: MPI Fortran code to wrap and run several jobs in parallel
-!===================================================================
-!
+   !===================================================================
+   !  MPIQ: MPI Fortran code to wrap and run several jobs in parallel
+   !===================================================================
+   !
    !use, intrinsic :: iso_fortran_env
    !use mpi_f08
    !use mpi
@@ -14,7 +14,7 @@ program mpiq
    character(len=1000),allocatable :: runcode(:)
    integer, allocatable            :: t1(:), t2(:)
    real                            :: ti, tf
-   integer                         :: i, irank, ierror, nproc, ntasks, ierr, leng, count_rate, istat
+   integer                         :: i, irank, ierror, nproc, ntasks, ierr, leng, count_rate, istat, rc
    integer, parameter              :: root=0
 
    ! Initialize MPI. This must be the first MPI call
@@ -51,9 +51,11 @@ program mpiq
        do i = 1, ntasks
            read(20,*) fname(i)                                                  ! Read the names of the input files 
       
-           runcode(i)  = "g09 "//trim(adjustl(fname(i)))                        ! Code exectution sentence (Gaussian09)
+           runcode(i)  = "$RUNCODE"//" "//trim(adjustl(fname(i)))                ! Code exectution sentence (Gaussian09)
+
+           !runcode(i)  = "g09 "//trim(adjustl(fname(i)))                        ! Code exectution sentence (Gaussian09)
    
-           !   runcode(i)  = "g09"//" < "//trim(adjustl(fname(i)))//".com > " &     ! Code execution sentence (including file extensions)
+           !   runcode(i)  = "g09"//" < "//trim(adjustl(fname(i)))//".com > " & ! Code execution sentence (including file extensions)
            !   &                         //trim(adjustl(fname(i)))//".out"          
            
            !! Codes that needs a work directory for each job
@@ -72,13 +74,16 @@ program mpiq
 
    call mpi_bcast(fname,80*ntasks,mpi_character,root,mpi_comm_world,ierr)
    !call mpi_bcast(runcode,1000*ntasks,mpi_character,0,mpi_comm_world,ierr)
-   scrdir = "mkdir -p /scratch/rmeanapa"                                  ! Scratch directory if needed
+   !scrdir = "mkdir -p /scratch/rmeanapa"    ! Scratch directory if needed
+   scrdir = "mkdir -p $SCRATCH"    ! Scratch directory if needed
 
    do i = irank+1, ntasks,nproc
-       call system(scrdir)                                                   ! Create scratch directory if needed
-       call system_clock(t1(i),count_rate)                                   ! Start time
-       call system(runcode(i))                                               ! Run code 
-       call system_clock(t2(i))                                              ! End time
+       !call system(scrdir)                                ! Create scratch directory if needed
+       call execute_command_line(scrdir, exitstat=rc)        ! Create scratch directory if needed
+       call system_clock(t1(i),count_rate)                ! Start time
+       !call system(runcode(i))                            ! Run code 
+       call execute_command_line(runcode(i), exitstat=rc) ! Run code
+       call system_clock(t2(i))             ! End time
        write(6,'(A4,A20,A13,A10,A7,I4,A14,f20.3,A9)') "Job ",fname(i)," executed in ",&
        &proc_name," irank ",irank," completed in ",real(t2(i)-t1(i))/real(count_rate), " seconds."
    enddo
