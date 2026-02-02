@@ -1,13 +1,13 @@
 # MPIQ
 
-A MPI Fortran code that wraps and runs a bunch of jobs in parallel.
+A MPI Fortran wrapper code for parallel jobs.
 
 ### Files 
 
 ``` mpiq.f90 ```        MPI/Fortran code to run several jobs in parallel.                           
-``` jobslist.txt ```    File with the number of jobs and the names of the input files (without extension).                         
-``` mpiq.pbs ```        PBS script to submit the jobs.                                                    
-``` mpiq.slurm ```      Slurm script to submit the jobs.                                                         
+``` jobslist.txt ```    File with number of jobs and names of the input files (without extension).                         
+``` mpiq.pbs ```        PBS submission script.                                                    
+``` mpiq.slurm ```      Slurm submission script.                                                         
 
 ### Installation
 
